@@ -1,16 +1,27 @@
 <?php
 
+header("Access-Control-Allow-Origin: http://localhost:5173");
+header("Access-Control-Allow-Headers: X-Requested-With");
+
 header('Content-Type: application/json');
 
-$students = [
-    [
-        'name' => 'mario',
-        'last_name' => 'rossi',
-    ],
-    [
-        'name' => 'giovanna',
-        'last_name' => 'bianchi'
-    ],
+    $items = [
+        [
+            'text'=> "HTML",
+            'done'=>  true
+        ],
+        [
+            'text'=> "CSS",
+            'done'=>  false
+        ],
+        [
+            'text'=> "Responsive Design",
+            'done'=>  true
+        ],
+        [
+            'text'=> "Javascript",
+            'done'=>  false
+        ],
 ];
 
-echo json_encode($students)
+echo json_encode($items);
