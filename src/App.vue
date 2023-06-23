@@ -26,7 +26,17 @@ export default {
         })
     },
     deleteTask(index) {
-      console.log('bravo', index);
+      const url = 'http://localhost/php-todo-list-json/php/deleteTask.php';
+      const data = { "index": index };
+      const headers = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      };
+      axios.post(url, data, headers)
+        .then(response => {
+          const data = response.data;
+          console.log(data);
+
+        })
     }
 
   },
