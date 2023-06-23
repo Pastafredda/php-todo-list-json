@@ -3,31 +3,38 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      items: []
-    }
-  },
-  methods: {
-    rimuovi(indice) {
-      this.items.splice(indice, 1)
-    },
-    aggiungi() {
-      this.items.unshift({ text: this.items.text })
-      this.items.text = "";
-    },
-    changeDone(indice) {
-      if (!this.items[indice].done) {
-        this.items[indice].done = true;
-      } else {
-        this.items[indice].done = false;
+      items: [],
+      newTask: {
+        text: ""
       }
     }
   },
-  mounted() {
-    console.log("hello world");
+  methods: {
+    onSubmit() {
+      const url = 'http://localhost/php-todo-list-json/php/newTask.php';
+      const data = this.newTask;
+      const headers = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      };
+      axios.post(url, data, headers)
+        .then(response => {
+          const data = response.data;
+          this.items = data;
 
+          this.newTask.text = '';
+
+        })
+    },
+    deleteTask(index) {
+      console.log('bravo', index);
+    }
+
+  },
+  mounted() {
     axios.get('http://localhost/php-todo-list-json/php/')
       .then(response => {
-        this.items = response.data;
+        const data = response.data;
+        this.items = data;
       })
   }
 };
@@ -39,16 +46,16 @@ export default {
     <header>
       <h1>To do List</h1>
     </header>
+
     <div class="aggiungi-task">
-      <input type="text" placeholder="Inserisci Task" v-model="items.text" @keyup.enter="aggiungi" />
-      <button @click="aggiungi">Aggiungi</button>
+      <input type="text" name="name" placeholder="Inserisci Task" v-model="newTask.text" @keyup.enter="onSubmit" />
+      <button @click="onSubmit">Aggiungi</button>
     </div>
 
     <div class="task-container">
       <ul>
-        <li @click.stop="changeDone(index)" class="task" :class="task.done ? 'sbarrato' : ''"
-          v-for="(task, index,) in items">
-          {{ task.text }}<i class="fa-solid fa-x" @click.stop="rimuovi(index)"></i>
+        <li class="task" v-for="(task, index) in items" :key="index">
+          {{ task.text }}<i class="fa-solid fa-x" @click="deleteTask(index)"></i>
         </li>
       </ul>
     </div>

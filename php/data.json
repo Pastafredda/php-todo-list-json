@@ -1,18 +1,18 @@
-    [
-        {
-            "text": "HTML",
-            "done": true
-        },
-        {
-            "text": "CSS",
-            "done": false
-        },
-        {
-            "text": "Responsive Design",
-            "done": true
-        },
-        {
-            "text": "Javascript",
-            "done": false
-        }
-    ]
+[
+    {
+        "text": "HTML",
+        "done": true
+    },
+    {
+        "text": "CSS",
+        "done": false
+    },
+    {
+        "text": "Responsive Design",
+        "done": true
+    },
+    {
+        "text": "Javascript",
+        "done": false
+    }
+]
