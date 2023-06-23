@@ -8,12 +8,10 @@ $index = $_POST['index'];
 $itemsStr = file_get_contents("data.json");
 $tasks = json_decode($itemsStr);
 
-if($tasks[$index] -> done == true){
-
-    $tasks[$index] -> done == false 
-}
-else{
-    $tasks[$index] -> done == true
+if($tasks[$index]->done === true){
+    $tasks[$index]->done = false;
+}else{
+    $tasks[$index]->done = true;
 }
 
 $itemsStr = json_encode($tasks);
