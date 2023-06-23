@@ -37,6 +37,19 @@ export default {
           this.items = data;
 
         })
+    },
+    taskDone(index) {
+      const url = 'http://localhost/php-todo-list-json/php/deleteTask.php';
+      const data = { "index": index };
+      const headers = {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      };
+      axios.post(url, data, headers)
+        .then(response => {
+          const data = response.data;
+          this.items = data;
+
+        })
     }
 
   },
@@ -64,7 +77,8 @@ export default {
 
     <div class="task-container">
       <ul>
-        <li class="task" v-for="(task, index) in items" :key="index">
+        <li class="task" v-for="(task, index) in items" :key="index" :class="task.done === 'sbarrato' ? '' : false"
+          @click="taskDone(i)">
           {{ task.text }}<i class="fa-solid fa-x" @click="deleteTask(index)"></i>
         </li>
       </ul>
