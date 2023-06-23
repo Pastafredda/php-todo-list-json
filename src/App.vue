@@ -34,7 +34,7 @@ export default {
       axios.post(url, data, headers)
         .then(response => {
           const data = response.data;
-          console.log(data);
+          this.items = data;
 
         })
     }
