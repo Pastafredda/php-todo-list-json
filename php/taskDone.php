@@ -6,13 +6,16 @@ header('Content-Type: application/json');
 
 $index = $_POST['index'];
 $itemsStr = file_get_contents("data.json");
-$tasks = json_decode($itemsStr);
+$tasks = json_decode($itemsStr,true);
+// Se usiamo l'if possiamo togliere il true da $tasks
 
-if($tasks[$index]->done === true){
-    $tasks[$index]->done = false;
-}else{
-    $tasks[$index]->done = true;
-}
+// if($tasks[$index]->done === true){
+//     $tasks[$index]->done = false;
+// }else{
+//     $tasks[$index]->done = true;
+// }
+
+$tasks[$index]["done"] = !$tasks[$index]["done"];
 
 $itemsStr = json_encode($tasks);
 

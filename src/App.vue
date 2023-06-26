@@ -49,8 +49,6 @@ export default {
         .then(response => {
           const data = response.data;
           this.items = data;
-          console.log(this.items);
-
         })
     }
 
@@ -73,8 +71,10 @@ export default {
     </header>
 
     <div class="aggiungi-task">
-      <input type="text" name="name" placeholder="Inserisci Task" v-model="newTask.text" @keyup.enter="onSubmit" />
-      <button @click="onSubmit">Aggiungi</button>
+      <form @submit.prevent="onSubmit">
+        <input type="text" name="name" placeholder="Inserisci Task" v-model="newTask.text" @keyup.enter="onSubmit" />
+        <button>Aggiungi</button>
+      </form>
     </div>
 
     <div class="task-container">
